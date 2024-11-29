@@ -25,8 +25,8 @@ fun main()
 
 fun greeting_menu()
 {
-    println("list of ID numbers for users 10038 10027 10083")
-    println("Please enter your library ID number to find your name")
+    println("list of ID numbers for users 10038 10027 10083.")
+    println("Please enter your library ID number to find your name.")
 }
 
 
@@ -39,10 +39,10 @@ fun User_Book_Info( Access_Key: Boolean ): Int
     // user failed to input user data correctly send unable to access user data message
     if (Access_Key == Access_Unathorized)
     {
-        println("\nunable to access user data")
+        println("\nunable to access user data.")
         return 0
     }
-    println("Please input the number of books you want to check out ")
+    println("Please input the number of books you want to check out. ")
 
     // user has input zero number of books
     var number_of_books = 0
@@ -63,7 +63,7 @@ fun User_Book_Info( Access_Key: Boolean ): Int
     catch ( e: NumberFormatException)
     {
         //Printing Error message
-        println("Error ${e.message}")
+        println("Error ${e.message}, input a number instead." )
 
         //Program waits for 1 minute then calls the function User_Book_Info
         Thread.sleep(1000)
@@ -78,8 +78,8 @@ fun User_Book_Info( Access_Key: Boolean ): Int
     {
         if (number_of_books >= 1 && i == 0)
         {
-            println("So you have $number_of_books Books ")
-            println("Please list the name of the books you want to borrow")
+            println("So you have $number_of_books Books. ")
+            println("Please list the name of the books you want to borrow.")
         }
 
 
@@ -131,8 +131,8 @@ fun FindUserName(inputID: String, User_Attempt : Int)
 
         //store pair one in  first name and pair two in last name
         val (firstName, lastName) = user_info
-        print("print user information")
-        println("User first name is $firstName and Last name is $lastName")
+        print("print user information.")
+        println("User first name is $firstName and Last name is $lastName.")
 
         //calling function
         User_Book_Info(User_Access)
@@ -159,14 +159,14 @@ fun FindUserName(inputID: String, User_Attempt : Int)
         {
             //subtracting the maxiuam amount of tires by the amoumt times to show how many attempt have left
             val Update_User_Attempt = MAX_TRIES - User_Attempt
-            println("Cant not find user information \n")
-            println("you have $Update_User_Attempt tries left")
+            println("Cant not find user information .\n")
+            println("you have $Update_User_Attempt tries left.")
         }
 
         //if user have excceed the amount of MAX tries end program
         if (User_Attempt == MAX_TRIES )
         {
-            println("thank you for your patience good bye")
+            println("thank you for your patience good bye.")
             // User acsess is getting restricted
             var User_Access = false
 
