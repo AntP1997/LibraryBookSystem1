@@ -4,19 +4,20 @@
 fun main()
 {
 
+    //Menu greeting
     greeting_menu()
 
     // user input
     val userinput = readln()
+
     //Finding username
     val user_access_limit = 0
 
-     FindUserName(userinput,user_access_limit)
+    //Calling Function
+    FindUserName(userinput,user_access_limit)
 
 
-    //User_Book_Info is taking the arguments the will either allow the user to access the data or not
-    //it will take the access_key and let the next function now if the user access failed
-                   // access failed       // access_key2
+
 
 
 
@@ -30,25 +31,52 @@ fun greeting_menu()
 
 
 // Book information
-fun User_Book_Info( Access_Key: Boolean ): Int{
+fun User_Book_Info( Access_Key: Boolean ): Int
+{
 
-    val  Access_Unathorized = false
+    val Access_Unathorized = false
 
     // user failed to input user data correctly send unable to access user data message
-    if( Access_Key == Access_Unathorized)
+    if (Access_Key == Access_Unathorized)
     {
-        println("\n unable to access user data")
+        println("\nunable to access user data")
         return 0
     }
-    println("Please input the number of books you want to borrow. ")
+    println("Please input the number of books you want to check out ")
 
-    val number_of_books = readln().toInt()
+    // user has input zero number of books
+    var number_of_books = 0
+
+
+    //try to get user input
+    try
+    {
+
+        val User_Input_Books = readln().toInt()
+
+        //User input value will be assigned to a variable outside the scope of try
+        number_of_books = User_Input_Books
+
+    }
+
+    //exceptoion catch if user inputs is a string and not integer
+    catch ( e: NumberFormatException)
+    {
+        //Printing Error message
+        println("Error ${e.message}")
+
+        //Program waits for 1 minute then calls the function User_Book_Info
+        Thread.sleep(1000)
+
+        //recusion
+        User_Book_Info(Access_Key)
+    }
 
     //having a dynamic array
     val list_of_books = ArrayList<String>()
-    for(i in 0 until number_of_books)
+    for (i in 0 until number_of_books)
     {
-        if(number_of_books >= 1 && i == 0)
+        if (number_of_books >= 1 && i == 0)
         {
             println("So you have $number_of_books Books ")
             println("Please list the name of the books you want to borrow")
@@ -56,10 +84,15 @@ fun User_Book_Info( Access_Key: Boolean ): Int{
 
 
         val names_of_books = readLine()
+
+        //this is the last book
         var LastBook = number_of_books - 1
+
+        // Adding User Books names to List
         list_of_books.add(names_of_books.toString())
-        // before i less then number of books we subtract on so the program dose not so next at last book
-        if( i < LastBook)
+
+        // i must be one least then the number of books so at the end of listing all books "Next Book"
+        if (i < LastBook)
         {
             println("Next Book")
         }
@@ -75,7 +108,8 @@ fun User_Book_Info( Access_Key: Boolean ): Int{
 }
 
 
-fun FindUserName(inputID: String, User_Attempt : Int)  {
+fun FindUserName(inputID: String, User_Attempt : Int)
+{
 
 
 
@@ -89,7 +123,9 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
     val user_info = user_map[inputID.toString()]
 
     val User_Access_Max_Limit = 2
-    if (user_info != null) {
+
+    if (user_info != null)
+    {
         //user is given access
         var User_Access = true
 
@@ -101,7 +137,9 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
         //calling function
         User_Book_Info(User_Access)
 
-    } else {
+    }
+    else
+    {
 
         //this adds one to keep count with user input
         val ADD = 1
@@ -109,7 +147,6 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
         // this is the number of tries for your data
         val MAX_TRIES = 2
 
-        
 
 
 
@@ -118,10 +155,11 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
 
 
         // Substracing UPDATE_MAX_TRIES to get count of number of attempts
-        if (User_Attempt <= MAX_TRIES) {
+        if (User_Attempt <= MAX_TRIES)
+        {
             //subtracting the maxiuam amount of tires by the amoumt times to show how many attempt have left
             val Update_User_Attempt = MAX_TRIES - User_Attempt
-            println("Cant not find user information ")
+            println("Cant not find user information \n")
             println("you have $Update_User_Attempt tries left")
         }
 
@@ -135,7 +173,9 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
             //calling function
             User_Book_Info(User_Access)
 
-        } else {
+        }
+        else
+        {
             // User greeting menu
             greeting_menu()
 
