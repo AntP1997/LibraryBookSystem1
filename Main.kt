@@ -109,9 +109,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
         // this is the number of tries for your data
         val MAX_TRIES = 2
 
-        //MAX_LIMIT is the max limit of tries the user will get
-        val MAX_LIMIT = 2
-
+        
 
 
 
@@ -128,7 +126,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
         }
 
         //if user have excceed the amount of MAX tries end program
-        if (User_Attempt == MAX_LIMIT )
+        if (User_Attempt == MAX_TRIES )
         {
             println("thank you for your patience good bye")
             // User acsess is getting restricted
