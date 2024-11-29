@@ -110,7 +110,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)  {
         val MAX_TRIES = 2
 
         //MAX_LIMIT is the max limit of tries the user will get
-        val MAX_LIMIT = 3
+        val MAX_LIMIT = 2
 
 
 
