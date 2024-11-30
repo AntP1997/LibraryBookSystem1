@@ -122,7 +122,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
     user_map["10083"] = Pair("Chris", "Mills")
     val user_info = user_map[inputID.toString()]
 
-    val User_Access_Max_Limit = 2
+    
 
     if (user_info != null)
     {
