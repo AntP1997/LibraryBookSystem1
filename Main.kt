@@ -142,7 +142,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
     {
 
         //this adds one to keep count with user input
-        val ADD = 1
+        val ADD_ONE = 1
 
         // this is the number of tries for you to access this data
         val MAX_TRIES = 2
@@ -151,7 +151,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
 
 
         // updating variable to keep count of user attempt
-        val Update_User_Access = ADD + User_Attempt
+        val Update_User_Access = ADD_ONE + User_Attempt
 
 
         // Substracing UPDATE_MAX_TRIES to get count of number of attempts
