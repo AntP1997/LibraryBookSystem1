@@ -20,13 +20,12 @@ fun main()
 
 
 
-
 }
 
 fun greeting_menu()
 {
-    println("list of ID numbers for users 10038 10027 10083.")
-    println("Please enter your library ID number to find your name.")
+    println("list of ID numbers for users 10038 10027 10083")
+    println("Please enter your library ID number to find your name")
 }
 
 
@@ -47,15 +46,30 @@ fun User_Book_Info( Access_Key: Boolean ): Int
     // user has input zero number of books
     var number_of_books = 0
 
+    //If user input a number one or greater then one
+    var User_Books = 1
+
+    //Count to zero in the for loop
+    var Zero_Count = 0
+
+    var Subtract_Books = 1
 
     //try to get user input
     try
     {
 
-        val User_Input_Books = readln().toInt()
 
+        val User_Input_Books = readln().toInt()
         //User input value will be assigned to a variable outside the scope of try
         number_of_books = User_Input_Books
+
+        // If user input for number of books is less then or equal to zero
+        if(User_Input_Books <= Zero_Count )
+        {
+            println("!!The number of Books you want to check out must be greater than 0!!\n")
+
+            User_Book_Info(Access_Key)
+        }
 
     }
 
@@ -76,17 +90,18 @@ fun User_Book_Info( Access_Key: Boolean ): Int
     val list_of_books = ArrayList<String>()
     for (i in 0 until number_of_books)
     {
-        if (number_of_books >= 1 && i == 0)
+
+        if (number_of_books >= User_Books && i == Zero_Count)
         {
             println("So you have $number_of_books Books. ")
             println("Please list the name of the books you want to borrow.")
         }
 
-        // User input for the names of Books user wants to CheckOut
+
         val names_of_books = readLine()
 
         //this is the last book
-        var LastBook = number_of_books - 1
+        var LastBook = number_of_books - Subtract_Books
 
         // Adding User Books names to List
         list_of_books.add(names_of_books.toString())
@@ -122,7 +137,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
     user_map["10083"] = Pair("Chris", "Mills")
     val user_info = user_map[inputID.toString()]
 
-    
+    val User_Access_Max_Limit = 2
 
     if (user_info != null)
     {
@@ -131,7 +146,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
 
         //store pair one in  first name and pair two in last name
         val (firstName, lastName) = user_info
-        print("print user information.")
+        print("print user information.\n")
         println("User first name is $firstName and Last name is $lastName.")
 
         //calling function
@@ -142,16 +157,16 @@ fun FindUserName(inputID: String, User_Attempt : Int)
     {
 
         //this adds one to keep count with user input
-        val ADD_ONE = 1
+        val ADD_TRiES = 1
 
-        // this is the number of tries for you to access this data
+        // this is the number of tries for your data
         val MAX_TRIES = 2
 
 
 
 
         // updating variable to keep count of user attempt
-        val Update_User_Access = ADD_ONE + User_Attempt
+        val Update_User_Access = ADD_TRiES + User_Attempt
 
 
         // Substracing UPDATE_MAX_TRIES to get count of number of attempts
@@ -188,4 +203,6 @@ fun FindUserName(inputID: String, User_Attempt : Int)
 
 
     }
+}
+
 }
