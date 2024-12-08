@@ -1,3 +1,6 @@
+import kotlin.system.exitProcess
+
+
 //Antoine Price
 //11/28/2024
 
@@ -6,20 +9,34 @@ fun main()
 
     //Menu greeting
     greeting_menu()
-
+    val Exit_Program_lowercase = "e"
+    val Exit_Program_uppercase = "E"
+    User_End_Session()
     // user input
     val userinput = readln()
-
+    if(userinput == Exit_Program_lowercase || userinput == Exit_Program_uppercase)
+    {
+        EndSessionMessage()
+        exitProcess(0)
+    }
     //Finding username
     val user_access_limit = 0
 
     //Calling Function
-    FindUserName(userinput,user_access_limit)
+    FindUserName(userinput,user_access_limit,Exit_Program_lowercase,Exit_Program_uppercase)
 
 
 
 
 
+}
+fun EndSessionMessage()
+{
+    println("Program is ending...")
+}
+fun User_End_Session()
+{
+    println("if you wish to end session type e OR E at any time doing the program")
 }
 
 fun greeting_menu()
@@ -30,7 +47,7 @@ fun greeting_menu()
 
 
 // Book information
-fun User_Book_Info( Access_Key: Boolean ): Int
+fun User_Book_Info( Access_Key: Boolean, exitUpercase: String,exitLowercase: String ): Int
 {
 
     val Access_Unathorized = false
@@ -42,7 +59,7 @@ fun User_Book_Info( Access_Key: Boolean ): Int
         return 0
     }
     println("Please input the number of books you want to check out. ")
-
+    println("If you want to end the session input a number less then or equal to zero")
     // user has input zero number of books
     var number_of_books = 0
 
@@ -54,28 +71,46 @@ fun User_Book_Info( Access_Key: Boolean ): Int
 
     var Subtract_Books = 1
 
+    var globeVarPass =""
+
     //try to get user input
     try
     {
 
 
         val User_Input_Books = readln().toInt()
+
         //User input value will be assigned to a variable outside the scope of try
         number_of_books = User_Input_Books
+         globeVarPass = User_Input_Books.toString()
+        println(User_Input_Books.toString())
 
         // If user input for number of books is less then or equal to zero
         if(User_Input_Books <= Zero_Count )
         {
-            println("!!The number of Books you want to check out must be greater than 0!!\n")
+            println("do you wish to end this session if so press e OR E to end session if not press any key ")
+            var User_answer = readln()
 
-            User_Book_Info(Access_Key)
-        }
+            if (User_answer == exitLowercase || User_answer == exitUpercase)
+            {
+                EndSessionMessage()
+                exitProcess(0)
+            }else
+            {
+
+
+                println("!!The number of Books you want to check out must be greater than 0!!\n")
+
+                User_Book_Info(Access_Key, exitLowercase, exitUpercase)
+            }
+            }
 
     }
 
     //exceptoion catch if user inputs is a string and not integer
     catch ( e: NumberFormatException)
     {
+
         //Printing Error message
         println("Error ${e.message}, input a number instead." )
 
@@ -83,15 +118,17 @@ fun User_Book_Info( Access_Key: Boolean ): Int
         Thread.sleep(1000)
 
         //recusion
-        User_Book_Info(Access_Key)
+        User_Book_Info(Access_Key,exitLowercase,exitUpercase)
     }
 
     //having a dynamic array
     val list_of_books = ArrayList<String>()
-    for (i in 0 until number_of_books)
+
+    //increment means count to number of books
+    for (increment in 0 until number_of_books)
     {
 
-        if (number_of_books >= User_Books && i == Zero_Count)
+        if (number_of_books >= User_Books && increment == Zero_Count)
         {
             println("So you have $number_of_books Books. ")
             println("Please list the name of the books you want to borrow.")
@@ -103,18 +140,38 @@ fun User_Book_Info( Access_Key: Boolean ): Int
         //this is the last book
         var LastBook = number_of_books - Subtract_Books
 
+        //LastInput variable is the last input for list of books for user
+        var LastInput = LastBook - Subtract_Books
+
+        // this will allow the user to exit the program
+        if(names_of_books == exitLowercase || names_of_books == exitUpercase)
+        {
+            EndSessionMessage()
+            exitProcess(0)
+        }
         // Adding User Books names to List
         list_of_books.add(names_of_books.toString())
 
         // i must be one least then the number of books so at the end of listing all books "Next Book"
-        if (i < LastBook)
+        if (increment < LastBook)
         {
-            println("Next Book")
+            // if i variable does not equal to user last input execute print statement
+            if (increment != LastInput)
+            {
+                println("Next Book")
+
+            }
+            // if the user is ready to type his last input the print statement will execute
+            else
+            {
+                println("Last Book")
+            }
         }
     }
 
     for ((index,book) in list_of_books.withIndex())
     {
+        // the program will wait for one second
         Thread.sleep(1000)
         println("${index + 1}# $book")
 
@@ -123,7 +180,7 @@ fun User_Book_Info( Access_Key: Boolean ): Int
 }
 
 
-fun FindUserName(inputID: String, User_Attempt : Int)
+fun FindUserName(inputID: String, User_Attempt : Int, exitLowercase: String, exitUppercase: String )
 {
 
 
@@ -137,7 +194,6 @@ fun FindUserName(inputID: String, User_Attempt : Int)
     user_map["10083"] = Pair("Chris", "Mills")
     val user_info = user_map[inputID.toString()]
 
-    val User_Access_Max_Limit = 2
 
     if (user_info != null)
     {
@@ -150,7 +206,7 @@ fun FindUserName(inputID: String, User_Attempt : Int)
         println("User first name is $firstName and Last name is $lastName.")
 
         //calling function
-        User_Book_Info(User_Access)
+        User_Book_Info(User_Access,exitLowercase,exitUppercase)
 
     }
     else
@@ -186,23 +242,28 @@ fun FindUserName(inputID: String, User_Attempt : Int)
             var User_Access = false
 
             //calling function
-            User_Book_Info(User_Access)
+            User_Book_Info(User_Access,exitLowercase,exitUppercase)
 
         }
         else
         {
             // User greeting menu
             greeting_menu()
-
+            User_End_Session()
             // User input
             val UserInput = readln()
-
+            if(UserInput == exitLowercase || UserInput == exitUppercase)
+            {
+                EndSessionMessage()
+                exitProcess(0)
+            }
             //Tail recusion
-            FindUserName(UserInput, Update_User_Access)
+            FindUserName(UserInput, Update_User_Access,exitLowercase,exitUppercase)
         }
 
 
     }
 }
 
-}
+
+
