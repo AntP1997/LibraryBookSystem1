@@ -88,7 +88,7 @@ fun User_Book_Info( Access_Key: Boolean, exitUpercase: String,exitLowercase: Str
         // If user input for number of books is less then or equal to zero
         if(User_Input_Books <= Zero_Count )
         {
-            println("do you wish to end this session if so press e OR E to end session if not press any key ")
+            println("Do you wish to end this session if so press e OR E to end session if not press any key ")
             var User_answer = readln()
 
             if (User_answer == exitLowercase || User_answer == exitUpercase)
