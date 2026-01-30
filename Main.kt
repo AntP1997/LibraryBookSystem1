@@ -49,7 +49,6 @@ fun greeting_menu()
 // Book information
 fun User_Book_Info( Access_Key: Boolean, exitUpercase: String,exitLowercase: String ): Int
 {
-
     val Access_Unathorized = false
 
     // user failed to input user data correctly send unable to access user data message
@@ -90,21 +89,16 @@ fun User_Book_Info( Access_Key: Boolean, exitUpercase: String,exitLowercase: Str
         {
             println("Do you wish to end this session if so press e OR E to end session if not press any key ")
             var User_answer = readln()
-
             if (User_answer == exitLowercase || User_answer == exitUpercase)
             {
                 EndSessionMessage()
                 exitProcess(0)
             }else
             {
-
-
                 println("!!The number of Books you want to check out must be greater than 0!!\n")
-
                 User_Book_Info(Access_Key, exitLowercase, exitUpercase)
             }
             }
-
     }
 
     //exceptoion catch if user inputs is a string and not integer
